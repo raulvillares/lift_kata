@@ -11,10 +11,23 @@ namespace Lift_Kata
         public void ReturnItsCurrentFloor(int currentFloor)
         {
             Lift lift = new Lift(currentFloor);
-            
+
             var result = lift.Floor();
-            
+
             Assert.Equal(result, currentFloor);
+        }
+
+        [Fact]
+        public void RespondToCalls()
+        {
+            int sourceFloor = 2;
+            int currentFloor = 0;
+            var lift = new Lift(currentFloor);
+
+            lift.Call(sourceFloor);
+
+            var result = lift.Floor();
+            Assert.Equal(result, sourceFloor);
         }
     }
 
@@ -30,6 +43,11 @@ namespace Lift_Kata
         public int Floor()
         {
             return _currentFloor;
+        }
+
+        public void Call(int sourceFloor)
+        {
+            throw new NotImplementedException();
         }
     }
 }
