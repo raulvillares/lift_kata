@@ -3,10 +3,10 @@ using Xunit;
 
 namespace Lift_Kata
 {
-    public class Tests
+    public class LiftShould
     {
         [Fact]
-        public void Test1()
+        public void ReturnItsCurrentFloor()
         {
             
             Lift lift = new Lift();
@@ -21,7 +21,7 @@ namespace Lift_Kata
     {
         public int Floor()
         {
-            throw new NotImplementedException();
+            return 2;
         }
     }
 }
