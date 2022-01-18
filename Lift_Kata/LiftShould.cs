@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Lift_Kata
@@ -10,7 +11,8 @@ namespace Lift_Kata
         [InlineData(3)]
         public void ReturnItsCurrentFloor(int currentFloor)
         {
-            Lift lift = new Lift(currentFloor);
+            var ticker = new TickerMock();
+            Lift lift = new Lift(currentFloor, ticker);
 
             var result = lift.Floor();
 
@@ -22,7 +24,8 @@ namespace Lift_Kata
         {
             int sourceFloor = 2;
             int currentFloor = 0;
-            var lift = new Lift(currentFloor);
+            var ticker = new TickerMock();
+            var lift = new Lift(currentFloor, ticker);
 
             lift.Call(new CallRequest(sourceFloor));
 
@@ -35,12 +38,39 @@ namespace Lift_Kata
         {
             int requestedFloor = 2;
             int currentFloor = 0;
-            var lift = new Lift(currentFloor);
+            var ticker = new TickerMock();
+            var lift = new Lift(currentFloor, ticker);
 
             lift.Move(new MoveRequest(requestedFloor));
 
             var result = lift.Floor();
             Assert.Equal(result, requestedFloor);
+        }
+        
+        [Fact]
+        public void AttendASecondCallRequest()
+        {
+            int requestedFloor = 2;
+            int anotherRequestedFloor = 1;
+            int currentFloor = 0;
+            var ticker = new TickerMock();
+            var lift = new Lift(currentFloor, ticker);
+
+            lift.Call(new CallRequest(requestedFloor));
+            ticker.Tick();
+            lift.Call(new CallRequest(anotherRequestedFloor));
+            
+            var result = lift.Log();
+            Assert.Equal(result[1], anotherRequestedFloor);
+            Assert.Equal(result[2], requestedFloor);
+        }
+    }
+
+    public class TickerMock:ITicker
+    {
+        public void Tick()
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -68,7 +98,7 @@ namespace Lift_Kata
     {
         private int _currentFloor;
 
-        public Lift(int currentFloor)
+        public Lift(int currentFloor, ITicker ticker)
         {
             _currentFloor = currentFloor;
         }
@@ -87,5 +117,15 @@ namespace Lift_Kata
         {
             _currentFloor = moveRequest.RequestedFloor;
         }
+
+        public List<int> Log()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface ITicker
+    {
+        void Tick();
     }
 }
