@@ -33,7 +33,7 @@ namespace Lift_Kata
 
     public class Lift
     {
-        private readonly int _currentFloor;
+        private int _currentFloor;
 
         public Lift(int currentFloor)
         {
@@ -47,7 +47,7 @@ namespace Lift_Kata
 
         public void Call(int sourceFloor)
         {
-            throw new NotImplementedException();
+            _currentFloor = sourceFloor;
         }
     }
 }
