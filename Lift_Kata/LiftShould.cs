@@ -29,6 +29,19 @@ namespace Lift_Kata
             var result = lift.Floor();
             Assert.Equal(result, sourceFloor);
         }
+        
+        [Fact]
+        public void MoveToRequestedFloor()
+        {
+            int requestedFloor = 2;
+            int currentFloor = 0;
+            var lift = new Lift(currentFloor);
+
+            lift.Move(requestedFloor);
+
+            var result = lift.Floor();
+            Assert.Equal(result, requestedFloor);
+        }
     }
 
     public class Lift
@@ -48,6 +61,11 @@ namespace Lift_Kata
         public void Call(int sourceFloor)
         {
             _currentFloor = sourceFloor;
+        }
+
+        public void Move(int requestedFloor)
+        {
+            throw new NotImplementedException();
         }
     }
 }
