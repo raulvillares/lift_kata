@@ -8,7 +8,20 @@ namespace Lift_Kata
         [Fact]
         public void Test1()
         {
-            Assert.True(true);
+            
+            Lift lift = new Lift();
+            
+            var result = lift.Floor();
+            
+            Assert.Equal(result, 2);
+        }
+    }
+
+    public class Lift
+    {
+        public int Floor()
+        {
+            throw new NotImplementedException();
         }
     }
 }
