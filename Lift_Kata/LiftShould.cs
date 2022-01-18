@@ -5,15 +5,16 @@ namespace Lift_Kata
 {
     public class LiftShould
     {
-        [Fact]
-        public void ReturnItsCurrentFloor()
+        [Theory]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void ReturnItsCurrentFloor(int currentFloor)
         {
-            
             Lift lift = new Lift();
             
             var result = lift.Floor();
             
-            Assert.Equal(result, 2);
+            Assert.Equal(result, currentFloor);
         }
     }
 
