@@ -75,7 +75,7 @@ namespace Lift_Kata
 
         public void Move(int requestedFloor)
         {
-            throw new NotImplementedException();
+            _currentFloor = requestedFloor;
         }
     }
 }
