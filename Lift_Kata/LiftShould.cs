@@ -10,7 +10,7 @@ namespace Lift_Kata
         [InlineData(3)]
         public void ReturnItsCurrentFloor(int currentFloor)
         {
-            Lift lift = new Lift();
+            Lift lift = new Lift(currentFloor);
             
             var result = lift.Floor();
             
@@ -20,9 +20,16 @@ namespace Lift_Kata
 
     public class Lift
     {
+        private readonly int _currentFloor;
+
+        public Lift(int currentFloor)
+        {
+            _currentFloor = currentFloor;
+        }
+
         public int Floor()
         {
-            return 2;
+            return _currentFloor;
         }
     }
 }
