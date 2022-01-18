@@ -24,7 +24,7 @@ namespace Lift_Kata
             int currentFloor = 0;
             var lift = new Lift(currentFloor);
 
-            lift.Call(sourceFloor);
+            lift.Call(new Request(sourceFloor));
 
             var result = lift.Floor();
             Assert.Equal(result, sourceFloor);
@@ -44,6 +44,16 @@ namespace Lift_Kata
         }
     }
 
+    public class Request
+    {
+        public readonly int SourceFloor;
+
+        public Request(int sourceFloor)
+        {
+            SourceFloor = sourceFloor;
+        }
+    }
+
     public class Lift
     {
         private int _currentFloor;
@@ -58,9 +68,9 @@ namespace Lift_Kata
             return _currentFloor;
         }
 
-        public void Call(int sourceFloor)
+        public void Call(Request request)
         {
-            _currentFloor = sourceFloor;
+            _currentFloor = request.SourceFloor;
         }
 
         public void Move(int requestedFloor)
